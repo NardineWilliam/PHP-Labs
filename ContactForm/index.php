@@ -1,5 +1,12 @@
 <?php
-require_once("config.php");
+require_once "vendor/autoload.php";
+
+
+$desired_view=isset($_GET["view"])?$_GET["view"]:default_view;
+if($desired_view=="display"){
+display_all_submits();
+exit();
+}
 
 $name = isset($_POST["name"])?$_POST["name"]:"";
 $email = isset($_POST["email"])?$_POST["email"]:"";
@@ -28,10 +35,12 @@ if(isset($_POST["submit"]))
 
     
 if (!isset($error_message)) {
+    store_submits_to_file($name,$email);
     echo '<p><b>' . success_message . '</b></p>';
     echo '<p><b>Name: </b>' . $name . '</p>';
     echo '<p><b>Email: </b>' . $email . '</p>';
     echo '<p><b>Message: </b>' . $message . '</p>';
+    echo"<br/> To show all submits <a href='index.php?view=display'>Click here</a>";
     exit();
 } 
 }

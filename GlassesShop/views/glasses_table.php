@@ -1,4 +1,5 @@
 <?php
+
     if (isset($_GET['search']) && !empty($_GET['search'])) {
          $items = Item::search('product_name', $_GET['search']);
     } elseif (isset($_GET['show_all'])) {
